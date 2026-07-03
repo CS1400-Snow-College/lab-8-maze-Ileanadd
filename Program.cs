@@ -40,19 +40,25 @@ class Program
                     newLeft++;
                     break;
             }
-            if (newTop >= 0 && newTop < mapRows.Length && newLeft >= 0 && newLeft < mapRows[newTop].Length)
-            {
-                Console.SetCursorPosition(newLeft, newTop);
-            }
+
+            TryMove(newTop, newLeft, mapRows);
+
             if (mapRows[Console.CursorTop][Console.CursorLeft] == '*')
             {
                 break;
             }
 
         } while (key != ConsoleKey.Escape);
-        
-        Console.WriteLine("You escaped the maze!");
 
-        
+        Console.Clear();
+        Console.WriteLine("You escaped the maze!");
+    }
+
+    static void TryMove(int newTop, int newLeft, string[] mapRows)
+    {
+        if (newTop >= 0 && newTop < mapRows.Length && newLeft >= 0 && newLeft < mapRows[newTop].Length && mapRows[newTop][newLeft] != '#')
+        {
+            Console.SetCursorPosition(newLeft, newTop);
+        }
     }
 }
