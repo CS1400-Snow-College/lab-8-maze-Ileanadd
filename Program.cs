@@ -44,8 +44,14 @@ class Program
             {
                 Console.SetCursorPosition(newLeft, newTop);
             }
+            if (mapRows[Console.CursorTop][Console.CursorLeft] == '*')
+            {
+                break;
+            }
 
         } while (key != ConsoleKey.Escape);
+        
+        Console.WriteLine("You escaped the maze!");
 
         
     }
