@@ -3,6 +3,8 @@
 
 // This program reads a maze from a text file, displays it on the console, and lets the user move through the maze with the use of arrow keys while avoiding walls and trying to get to the exit.
 
+using System;
+using System.Diagnostics;
 class Program
 {
     static void Main()
@@ -16,6 +18,9 @@ class Program
         }
 
         Console.SetCursorPosition(0, 0);
+
+        Stopwatch timer = new Stopwatch();
+        timer.Start();
 
         ConsoleKey key;
         do
@@ -45,13 +50,17 @@ class Program
 
             if (mapRows[Console.CursorTop][Console.CursorLeft] == '*')
             {
+                timer.Stop();
                 break;
             }
 
         } while (key != ConsoleKey.Escape);
 
+        TimeSpan time = timer.Elapsed;
+
         Console.Clear();
         Console.WriteLine("You escaped the maze!");
+        Console.WriteLine($"Time Elapsed: {time.TotalSeconds:F2} seconds");
     }
 
     static void TryMove(int newTop, int newLeft, string[] mapRows)
